@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <title>Virtual Keyboard / Виртуальная клавиатура</title>
 </head>
 <body>
     <div class="container">
-        <p class="title">Virtual Keyboard</p>
-        <textarea class="textarea"></textarea>
-        <div class="keyboard">
+        <h1 class="title">Virtual Keyboard</h1>
+        <p class="subtitle">Keyboard was created in Microsoft Windows 10 OS</p>
+        <textarea class="keyboard--active"></textarea>
+        <!-- <div class="keyboard">
             <div class="keyboard__keys">
                 <button type="button" class="keyboard__key">A</button>
                 <button type="button" class="keyboard__key keyboard__key--wide">
@@ -28,7 +31,7 @@
                     <i class="material-icons">space_bar</i>
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script src="script.js"></script>
