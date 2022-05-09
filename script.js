@@ -21,6 +21,12 @@ const Keyboard = {
         this.elements.main.classList.add("keyboard", "1keyboard--hidden");
         this.elements.keysContainer.classList.add("keyboard__keys");
 
+        // Add keys to keysContainer:
+        this.elements.keysContainer.appendChild(this._createKeys());
+
+        // Get an array of all the keys:
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
         // Add keyContainer to main & main to DOM:
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
@@ -177,7 +183,17 @@ const Keyboard = {
 
     },
     _toggleCapsLock() {
+        // Set capsLock value to opposite:
+        this.properties.capsLock = !this.properties.capsLock;
 
+        // Loop through an array of keys:
+        for (const key of this.elements.keys) {
+            // Check if there is no icons on the key & it's a letter key (not Ctrl, Alt):
+            if (key.childElementCount === 0 && key.textContent.length === 1) {
+                // If capsLock = true, make letters to upper case:
+                key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+            }
+        }
     },
     openKeyboard(initialValue, oninput, onclose) {
 
