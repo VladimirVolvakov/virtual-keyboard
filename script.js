@@ -18,7 +18,7 @@ const Keyboard = {
         this.elements.keysContainer = document.createElement("div");
 
         // Add classes to elements.main & elements.container:
-        this.elements.main.classList.add("keyboard", "1keyboard--hidden");
+        this.elements.main.classList.add("keyboard", "keyboard--hidden");
         this.elements.keysContainer.classList.add("keyboard__keys");
 
         // Add keys to keysContainer:
@@ -30,6 +30,15 @@ const Keyboard = {
         // Add keyContainer to main & main to DOM:
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
+
+        // Open keyboard after click on the textarea:
+        document.querySelectorAll(".keyboard--active").forEach(element => {
+            element.addEventListener("focus", () => {
+                this.openKeyboard(element.value, currentValue => {
+                    element.value = currentValue;
+                });
+            });
+        });
     },
     _createKeys() {
         // Create a fragment (container for all the keys):
@@ -110,7 +119,7 @@ const Keyboard = {
                     keyElement.innerHTML = createIconHTML("keyboard_hide");
         
                     keyElement.addEventListener("click", () => {
-                        this.close();
+                        this.closeKeyboard();
                         this._triggerEvent("onclose");
                     });
                             
@@ -198,6 +207,7 @@ const Keyboard = {
         }
     },
     openKeyboard(initialValue, oninput, onclose) {
+        // Set value to passed initialValue or empty string:
         this.properties.value = initialValue || "";
 
         // Set event handlers:
@@ -208,7 +218,15 @@ const Keyboard = {
         this.elements.main.classList.remove("keyboard--hidden");
     },
     closeKeyboard() {
+        // Set value to empty string:
+        this.properties.value = "";
 
+        // Set event handlers:
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+
+        // Add class .keyboard--hidden to hide the keyboard:
+        this.elements.main.classList.add("keyboard--hidden");
     }
 };
 
