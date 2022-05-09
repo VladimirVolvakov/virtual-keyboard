@@ -180,7 +180,9 @@ const Keyboard = {
         return fragment;
     },
     _triggerEvent(handlerName) {
-
+        if (typeof this.eventHandlers[handlerName] == "function") {
+            this.eventHandlers[handlerName](this.properties.value);
+        }
     },
     _toggleCapsLock() {
         // Set capsLock value to opposite:
@@ -196,7 +198,14 @@ const Keyboard = {
         }
     },
     openKeyboard(initialValue, oninput, onclose) {
+        this.properties.value = initialValue || "";
 
+        // Set event handlers:
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+
+        // Remove class .keyboard--hidden when open the keyboard:
+        this.elements.main.classList.remove("keyboard--hidden");
     },
     closeKeyboard() {
 
