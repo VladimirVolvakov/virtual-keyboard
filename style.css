@@ -27,6 +27,8 @@ p {
 .keyboard--active {
     width: 80%;
     height: 250px;
+    font-size: 24px;
+    background: #f7f7f7;
 }
 
 .keyboard {
