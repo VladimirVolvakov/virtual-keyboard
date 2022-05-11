@@ -143,6 +143,11 @@ const Keyboard = {
 
                 case "tab":
                     keyElement.innerHTML = createIconHTML("keyboard_tab");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\t";
+                        this._triggerEvent("oninput");
+                    });
     
                     break;
 
@@ -184,7 +189,7 @@ const Keyboard = {
             if (insertLineBreak) {
                 fragment.appendChild(document.createElement("br"));
             }
-        });
+        });        
 
         return fragment;
     },
